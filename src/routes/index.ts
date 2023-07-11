@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import e, { Request, Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 import multer from 'multer';
 import readline from 'readline';
 import { Readable } from 'stream';
@@ -34,11 +34,18 @@ router.post('/users', multerConfig.single('file'), async (request: Request, resp
     });
 
     const usersArray: User[] = [];
-
+    
     for await (const line of usersLine) {
       const usersLineSplit = line.split(';');
 
       const [name, city, country, favorite_sport] = usersLineSplit;
+
+      const user: User = {
+        name,
+        city,
+        country,
+        favorite_sport,
+      };
 
       await prisma.user.create({
         data:{
@@ -48,11 +55,48 @@ router.post('/users', multerConfig.single('file'), async (request: Request, resp
             favorite_sport,
         }
       });
+
+      usersArray.push(user);
     }
+
     return response.json(usersArray);
   } catch (error) {
     console.error('Error creating users:', error);
     return response.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.get('/get:value?', async (req: Request, res: Response) => {
+  const { value } = req.params;
+    if (!value) {
+    const listUser = await prisma.user.findMany({
+      select: {
+        name: true,
+        city: true,
+        country: true,
+        favorite_sport: true
+      },
+    }); 
+    return res.status(210).json(listUser); 
+  } else {
+    const search = await prisma.user.findMany({
+      where: {
+        OR: [
+          { name: value},
+          { city: value },
+          { country: value },
+          { favorite_sport: value },
+        ],
+      },
+      select: {
+        name: true,
+        city: true,
+        country: true,
+        favorite_sport: true,
+      },
+    });
+    console.log(search);
+    return res.json(search);
   }
 });
 
