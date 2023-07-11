@@ -1,52 +1,59 @@
-import { PrismaClient} from "@prisma/client";
-const prisma = new PrismaClient();
-import { Request, Response, Router} from "express";
-import multer from "multer";
-import readline from "readline";
-import { Readable } from "stream";
+import { PrismaClient } from '@prisma/client';
+import e, { Request, Response, Router } from 'express';
+import multer from 'multer';
+import readline from 'readline';
+import { Readable } from 'stream';
 
+const prisma = new PrismaClient();
 const multerConfig = multer();
 const router = Router();
 
-interface User{
-    name: string;
-    city: string;
-    country: string;
-    favorite_sport: string;
+interface User {
+  name: string;
+  city: string;
+  country: string;
+  favorite_sport: string;
 }
 
-router.post("/users", multerConfig.single("file"), 
-async (request: Request, response: Response)=> { 
+router.post('/users', multerConfig.single('file'), async (request: Request, response: Response) => {
+  try {
     const { file } = request;
-    const buffer = file?.buffer;
-    
+
+    if (!file) {
+      return response.status(400).json({ error: 'No file provided' });
+    }
+
+    const buffer = file.buffer;
+
     const readableFile = new Readable();
     readableFile.push(buffer);
-    readableFile.push(null); 
+    readableFile.push(null);
+
     const usersLine = readline.createInterface({
-        input: readableFile,
+      input: readableFile,
     });
+
     const usersArray: User[] = [];
-    for await (let line of usersLine) {
-        const usersLineSplit = line.split(";");   
-        usersArray.push({
-            name: usersLineSplit[0],
-            city: usersLineSplit[1],
-            country: usersLineSplit[2],
-            favorite_sport: usersLineSplit[3] 
-        });
+
+    for await (const line of usersLine) {
+      const usersLineSplit = line.split(';');
+
+      const [name, city, country, favorite_sport] = usersLineSplit;
+
+      await prisma.user.create({
+        data:{
+            name,
+            city,
+            country,
+            favorite_sport,
+        }
+      });
     }
-    for await (let {name, city, country, favorite_sport} of usersArray){
-        await prisma.user.create({
-            data: {
-                name,
-                city,
-                country,
-                favorite_sport
-            },
-        });
-    }
-    return response.send();
+    return response.json(usersArray);
+  } catch (error) {
+    console.error('Error creating users:', error);
+    return response.status(500).json({ error: 'Internal server error' });
+  }
 });
 
-export {router};
+export { router };
