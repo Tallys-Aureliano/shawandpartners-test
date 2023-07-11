@@ -8,7 +8,7 @@ const searchController = new SearchController();
 const upload = Router();
 const multerConfig = multer();
 
-upload.get("/users:value?", searchController.handle);
+upload.get("/users", searchController.handle);
 upload.post("/file", multerConfig.single('file'),uploadUserController.handle);
 
 export {upload};
