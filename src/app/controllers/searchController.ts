@@ -5,8 +5,9 @@ const prisma = new PrismaClient();
 export class SearchController {
     async handle(req: Request, res:Response) {
         try {
-            const { value } = req.params;
-                if (!value) {
+            const q: string = req.query.q as string;
+            console.log(q)
+                if (!q) {
                 const listUser = await prisma.user.findMany({
                   select: {
                     name: true,
@@ -20,10 +21,10 @@ export class SearchController {
                 const search = await prisma.user.findMany({
                   where: {
                     OR: [
-                      { name: value},
-                      { city: value },
-                      { country: value },
-                      { favorite_sport: value },
+                      { name: q},
+                      { city: q },
+                      { country: q },
+                      { favorite_sport: q },
                     ],
                   },
                   select: {
