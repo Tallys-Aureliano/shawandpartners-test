@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { uploadUsersUseCase } from '../usercase/createUsers';
+import { uploadUsersUseCase } from '../usercase/uploadUsers';
 import { Readable } from 'stream';
 import readline from 'readline';
 import { userDto } from '../dtos/usersDtos';
@@ -22,7 +22,7 @@ export class UploadUserController {
             });
 
             const usersArray: userDto[] = [];
-
+            const create = new uploadUsersUseCase();
             for await (const line of usersLine) {
                 const usersLineSplit = line.split(';');
                 const [name, city, country, favorite_sport] = usersLineSplit;
@@ -32,7 +32,7 @@ export class UploadUserController {
                     country,
                     favorite_sport,
                 };
-                await uploadUsersUseCase(user);
+                const newUser = await create.execute(user);
                 usersArray.push(user);
             }
             return res.status(StatusCodes.CREATED).json(usersArray);
