@@ -8,16 +8,18 @@
   <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white"/>
 </div>
 
-- [📑 About o projeto](#-about)
+<br>
+
+- [📑 About the project](#-about)
 - [📖 Documentation](#-documentation)
 - [📥 Package Manager](#-packages)
-- [🚀 Começando](#-comecando)
+- [🚀 Starting](#-starting)
 
 ## 📖 Documentation
 
 - [[Project] - Class diagram](./docs/app_diagram.png)
 
-- [[Project] - Entity relationship diagram](./DOCS/ERD.png)
+- [[Project] - Entity relationship diagram](./docs/ERD.png)
 
 - [[Project] - Insomnia API Collection](./docs/Insomnia_2023-07-12.json)
 
