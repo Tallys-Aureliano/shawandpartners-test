@@ -8,41 +8,41 @@
   <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white"/>
 </div>
 
-- [📑 Sobre o projeto](#-sobre)
-- [📖 Documentação](#-documentacao)
-- [📥 Gerenciador de pacotes](#-pacotes)
+- [📑 About o projeto](#-about)
+- [📖 Documentation](#-documentation)
+- [📥 Package Manager](#-packages)
 - [🚀 Começando](#-comecando)
 
-## 📖 Documentação
+## 📖 Documentation
 
 - [[Project] - Class diagram](./docs/app_diagram.png)
 
-- [[Project] - Diagrama de relação de entidades](./DOCS/ERD.png)
+- [[Project] - Entity relationship diagram](./DOCS/ERD.png)
 
 - [[Project] - Insomnia API Collection](./docs/Insomnia_2023-07-12.json)
 
 ## 📑 About
 The purpose of this test is to evaluate your skills in Fullstack, Backend(my choice), and/or Frontend development. You will be required to build a web application that allows users to load a CSV file with preformatted data and display the data as cards on the website. The application should also include a search bar that allows users to search for data within the loaded CSV file.
-  ### Requirements for Backend
-  An endpoint that allows the frontend to load the CSV file.
-  An endpoint that allows the frontend to search through the loaded CSV data.
-  The search endpoint should accept query parameters for search terms and filters, and should return the matching results.
-  Appropriate error handling for invalid search queries or other errors.
-### Instructions for Backend
-- The backend should be implemented as a RESTful API using Node. (Try not to use an opinionated framework such as Adonis or Nest).
-- The backend must include the following endpoints:
-  - [POST /api/files] An endpoint that accepts a CSV file upload from the frontend and stores the data in a database or a data structure.
-  - [GET /api/users] Should include an endpoint that allows the frontend to search through the loaded CSV data.
-- The search endpoint should accept a ?q= query parameter for search terms and should search through EVERY column of the CSV
-- The backend should include appropriate error handling for invalid requests or other errors.
+   ### Requirements for Backend
+   An endpoint that allows the frontend to load the CSV file.
+   An endpoint that allows the frontend to search through the loaded CSV data.
+   The search endpoint should accept query parameters for search terms and filters, and should return the matching results.
+   Appropriate error handling for invalid search queries or other errors.
+   ### Instructions for Backend
+   - The backend should be implemented as a RESTful API using Node. (Try not to use an opinionated framework such as Adonis or Nest).
+   - The backend must include the following endpoints:
+   - [POST /api/files] An endpoint that accepts a CSV file upload from the frontend and stores the data in a database or a data structure.
+   - [GET /api/users] Should include an endpoint that allows the frontend to search through the loaded CSV data.
+   - The search endpoint should accept a ?q= query parameter for search terms and should search through EVERY column of the CSV
+   - The backend should include appropriate error handling for invalid requests or other errors.
 
-# 📥 Pacotes
+# 📥 Packages
 The project was developed using NPM, but you can use any of the managers below:
 - Yarn
 - PNPM
 - NPM
 
-## 🚀 Comecando
+## 🚀 Starting
 
 ### Step 1:
    > When cloning the project run the command **npm install** in the terminal to install the dependencies.
@@ -56,11 +56,11 @@ The project was developed using NPM, but you can use any of the managers below:
 ### Step 4:
    > Activate the node server with: **npm run dev**. This will cause your application to start and start receiving requests.
   
-   ### Step 5:
-   > Then run the command: **npm run migrate**. Thus creating a new migration for the database.
- 
-### Step 6:
+### Step 5:
    > Then run the command:**npm run studio** in the terminal. This will show your database using the prism layout.
 
-### Step 7:
+### Step 6:
    > If you have errors with migrate, run:**npx prisma migrate reset** and the migrations will be reset, then repeat the previous steps.
+
+### Step 7:
+     > To run the tests run the command **npm test**.
