@@ -65,4 +65,4 @@ The project was developed using NPM, but you can use any of the managers below:
    > If you have errors with migrate, run:**npx prisma migrate reset** and the migrations will be reset, then repeat the previous steps.
 
 ### Step 7:
-     > To run the tests run the command **npm test**.
+  > To run the tests run the command **npm test**.
