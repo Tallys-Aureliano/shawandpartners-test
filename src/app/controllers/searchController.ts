@@ -16,18 +16,15 @@ export class SearchController {
         const search = await searchUsers(q);
         if (!search.length) {
           return res.status(StatusCodes.BAD_REQUEST).json({ error: "Error. There is no registered information" });
-        } else {
-          return res.status(StatusCodes.OK).json(search);
         }
-      }
-    } catch (error) {
-      console.log(error);
-      return res.status(StatusCodes.NOT_FOUND).json({ error: "The server cannot find the requested resource" });
+      return res.status(StatusCodes.OK).json(search);
+    }} catch (error) {
+      return res.status(StatusCodes.NOT_FOUND).send({ error: "The server cannot find the requested resource" });
     }
   }
 }
 
-async function getUsers() {
+export async function getUsers() {
 
   const listUser = await prisma.user.findMany({
     select: {
@@ -40,7 +37,7 @@ async function getUsers() {
   return listUser;
 }
 
-async function searchUsers(q: string) {
+export async function searchUsers(q: string) {
 
   const search = await prisma.user.findMany({
     where: {
