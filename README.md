@@ -56,13 +56,15 @@ The project was developed using NPM, but you can use any of the managers below:
    > To connect to the database, write the following line in the **.env** file: *DATABASE_URL="file:./dev.db"* or find the same line in the [.env.example] (./ .env.example)
  
 ### Step 4:
-   > Activate the node server with: **npm run dev**. This will cause your application to start and start receiving requests.
-  
+   > Run the **npx prisma migrate dev** command to initialize the application database
 ### Step 5:
+   > To connect to the database, write the following line in the **.env** file: *DATABASE_URL="file:./dev.db"* or find the same line in the [.env.example] (./ .env.example)
+ 
+### Step 6:
    > Then run the command:**npm run studio** in the terminal. This will show your database using the prism layout.
 
-### Step 6:
+### Step 7:
    > If you have errors with migrate, run:**npx prisma migrate reset** and the migrations will be reset, then repeat the previous steps.
 
-### Step 7:
+### Step 8:
   > To run the tests run the command **npm test**.
