@@ -19,7 +19,7 @@
 
 - [[Project] - Class diagram](./docs/app_diagram.png)
 
-- [[Project] - Entity relationship diagram](./docs/ERD.png)
+- [[Project] - Entity relationship diagram](./docs/ERD.svg)
 
 - [[Project] - Insomnia API Collection](./docs/Insomnia_2023-07-12.json)
 
